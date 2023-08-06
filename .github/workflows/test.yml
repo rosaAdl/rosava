@@ -58,12 +58,11 @@ jobs:
           bundle install --jobs=3 --retry=3
       - name: Yarn install
         run: yarn --frozen-lockfile
-      - name: Yarn build css
-        run: yarn build:css
       - name: DB Setup
         run:  | 
           bundle exec rake db:create
           bundle exec rake db:schema:load
+          bundle exec rake assets:precompile
       - name: Run tests
         run: bundle exec rake test
       - name: Run System tests

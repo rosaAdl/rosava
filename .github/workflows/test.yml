@@ -1,0 +1,40 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
+
+name: Ruby Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
+        with:
+          ruby-version: '3.2.2'
+      - name: Install dependencies step 1
+        run: bundle install --jobs=3 --retry=3
+      - name: Install dependencies step 2
+        run: yarn
+      - name: Install dependencies step 3
+        run: bundle exec rake db:create
+      - name: Install dependencies step 4
+        run: bundle exec rake db:schema:load
+      - name: Run tests
+        run: bundle exec rake test
+      - name: Run System tests
+        run: bundle exec rake test:system

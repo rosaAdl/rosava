@@ -6,8 +6,12 @@
 #
 one: 
   email: alice@example.com
-# column: value
+  confirmed_at: <%= Time.zone.now %>
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password')%>
+
 #
 two: 
   email: bob@example.com
-# column: value
+  confirmed_at: <%= Time.zone.now %>
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password')%>
+

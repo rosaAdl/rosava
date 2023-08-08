@@ -6,16 +6,32 @@
   "configurations": [
     {
       "type": "rdbg",
-      "name": "Debug current file with rdbg",
-      "request": "launch",
-      "script": "./bin/rails s",
-      "useBundler": false,
-      "command": "ruby"
+      "name": "Attach with rdbg",
+      "request": "attach"
     },
     {
       "type": "rdbg",
-      "name": "Attach with rdbg",
-      "request": "attach"
-    }
+      "name": "Run system test: Remember to attach",
+      "request": "launch",
+      "script": "./bin/rails test:system",
+      "args": [],
+      "askParameters": false // Do not ask startup parameter any more
+    },
+    {
+      "type": "rdbg",
+      "name": "Debug running app",
+      "request": "launch",
+      "script": "./bin/dev",
+      "useBundler": false,
+      
+    },
+    {
+      "type": "rdbg",
+      "name": "Debug current file with rdbg",
+      "request": "launch",
+      "script": "${file}",
+      "args": [],
+      "askParameters": true
+    },
   ]
 }
